@@ -1,10 +1,9 @@
 require('dotenv').config();
 
 const version = require('./version.json');
-const template = require('./template.config.ts');
 
 const get = (key: string): string => {
-  const value = process.env[key] || template.placeholders?.[key];
+  const value = process.env[key];
   if (!value) throw new Error(`Missing required env/config key: ${key}`);
   return value;
 };

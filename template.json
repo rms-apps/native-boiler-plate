@@ -1,6 +1,0 @@
-{
-  "name": "native-boiler-plate",
-  "description": "A production-ready Expo + NativeWind + TypeScript boilerplate",
-  "version": "1.0.0",
-  "templateDirectory": "."
-}
