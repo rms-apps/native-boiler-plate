@@ -5,7 +5,7 @@ A production-ready Expo boilerplate with dynamic configuration.
 ### 🚀 Usage
 
 ```bash
-npx create-expo-app my-app --template https://github.com/your-username/native-boilerplate
+npx create-expo-app my-app --template https://github.com/rms-apps/native-boiler-plate
 ```
 
 ### 🔧 Setup
