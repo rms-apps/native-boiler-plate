@@ -1,12 +1,32 @@
+require('dotenv').config();
+
 const version = require('./version.json');
-const constants = require('./app-constants.json');
+const template = require('./template.config.ts');
+
+const get = (key: string): string => {
+  const value = process.env[key] || template.placeholders?.[key];
+  if (!value) throw new Error(`Missing required env/config key: ${key}`);
+  return value;
+};
+
+const constants = {
+  appName: get('APP_NAME'),
+  slug: get('APP_SLUG'),
+  scheme: get('ANDROID_PACKAGE'),
+  iosBundleId: get('IOS_BUNDLE_ID'),
+  androidPackage: get('ANDROID_PACKAGE'),
+  description: get('DESCRIPTION'),
+  androidAppId: get('ANDROID_APP_ID'),
+  iosAppId: get('IOS_APP_ID'),
+  easProjectId: get('EAS_PROJECT_ID'),
+};
 
 export default {
   expo: {
     name: constants.appName,
     slug: constants.slug,
     version: version.version,
-    description: '',
+    description: constants.description,
     scheme: constants.scheme,
     orientation: 'portrait',
     icon: './assets/images/icon.png',
@@ -40,7 +60,8 @@ export default {
       [
         'react-native-google-mobile-ads',
         {
-          androidAppId: '',
+          androidAppId: constants.androidAppId,
+          iosAppId: constants.iosAppId,
         },
       ],
       [
@@ -79,7 +100,7 @@ export default {
         origin: false,
       },
       eas: {
-        projectId: '',
+        projectId: constants.easProjectId,
       },
     },
     owner: 'rishim777',

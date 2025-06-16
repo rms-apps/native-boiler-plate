@@ -1,7 +1,0 @@
-{
-  "appName": "{{APP_NAME}}",
-  "slug": "{{APP_SLUG}}",
-  "androidPackage": "{{ANDROID_PACKAGE}}",
-  "iosBundleId": "{{IOS_BUNDLE_ID}}",
-  "scheme": "{{ANDROID_PACKAGE}}"
-}
