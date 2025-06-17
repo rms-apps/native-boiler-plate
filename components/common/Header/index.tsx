@@ -1,29 +1,25 @@
-import { ThemedView } from '../Themed/ThemedView';
-import { ThemedText } from '../Themed/ThemedText';
 import { Ionicons } from '@expo/vector-icons';
-import SingleSidedShadowBox from '../SingleShadowBox';
 import { THEME } from '@/lib/constants/common';
 import { useAppColors } from '@/lib/hooks/useAppColors';
 import { Pressable, StyleSheet, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSettingsStore } from '@/context/Settings/store';
-import { useThemeColor } from '@/lib/hooks/useThemeColor';
+import { ThemedView } from '@/components/common/Themed/ThemedView';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ThemedText } from '@/components/common/Themed/ThemedText';
+import { SingleSidedShadowBox } from '@/components/common/SingleShadowBox';
 
 export type HeaderProps = {
   title: string;
   height?: number;
-  withPaddingTop?: boolean;
+  disableSafeAreaTopInset?: boolean;
   handleClick?: () => void;
 };
 
-const child = ({ title, withPaddingTop = false, handleClick }: HeaderProps) => {
+const child = ({ title, handleClick }: HeaderProps) => {
   const { ICON_DEFAULT } = useAppColors();
 
   return (
-    <ThemedView
-      variant="secondary"
-      style={[styles.header_container, withPaddingTop && { paddingTop: 15 }]}
-    >
+    <ThemedView variant="secondary" style={[styles.header_container]}>
       <View style={styles.left_pane}>
         <Ionicons name="timer-outline" size={22} color={ICON_DEFAULT} />
         <ThemedText lightColor="#7A7D85" size="h3" weight="extrabold">
@@ -40,22 +36,30 @@ const child = ({ title, withPaddingTop = false, handleClick }: HeaderProps) => {
   );
 };
 
-export const Header = (props: HeaderProps) => {
+export const Header = ({
+  height,
+  disableSafeAreaTopInset = false,
+  ...props
+}: HeaderProps) => {
+  const insets = useSafeAreaInsets();
   const { theme } = useSettingsStore();
   const { BACKGROUND_SECONDARY } = useAppColors();
 
   return (
-    <>
-      <SafeAreaView style={{ backgroundColor: BACKGROUND_SECONDARY }} />
-
-      {theme == THEME.LIGHT ? (
-        <SingleSidedShadowBox style={{ height: props?.height || 40 }}>
-          {child({ ...props })}
+    <View
+      style={{
+        paddingTop: disableSafeAreaTopInset ? 0 : insets.top,
+        backgroundColor: BACKGROUND_SECONDARY,
+      }}
+    >
+      {theme === THEME.LIGHT ? (
+        <SingleSidedShadowBox style={{ height: height || 40 }}>
+          {child(props)}
         </SingleSidedShadowBox>
       ) : (
-        child({ ...props })
+        child(props)
       )}
-    </>
+    </View>
   );
 };
 
@@ -65,7 +69,7 @@ const styles = StyleSheet.create({
     zIndex: 100,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingBottom: 15,
+    paddingVertical: 15,
     paddingHorizontal: 20,
 
     elevation: 10,

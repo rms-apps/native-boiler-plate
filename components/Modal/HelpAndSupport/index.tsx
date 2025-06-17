@@ -45,9 +45,9 @@ export const HelpAndSupportModal = ({
   ];
 
   return (
-    <View style={styles.modalContainer}>
+    <ThemedView style={styles.modalContainer}>
       <Modal visible={visible} animationType="slide" onRequestClose={onClose}>
-        <Header title="Help & Support" height={80} withPaddingTop />
+        <Header title="Help & Support" disableSafeAreaTopInset />
 
         <ThemedView style={styles.modalContent}>
           <ScrollView contentContainerStyle={styles.scrollView}>
@@ -73,13 +73,12 @@ export const HelpAndSupportModal = ({
           </View>
         </ThemedView>
       </Modal>
-    </View>
+    </ThemedView>
   );
 };
 
 const styles = StyleSheet.create({
   modalContainer: {
-    width: 100,
     height: 100,
     position: 'absolute',
   },

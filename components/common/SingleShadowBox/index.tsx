@@ -6,12 +6,10 @@ type Props = {
   style?: StyleProp<ViewStyle>;
 };
 
-const SingleSidedShadowBox = ({ children, style }: Props) => {
+export const SingleSidedShadowBox = ({ children, style }: Props) => {
   return (
     <View style={[style, { paddingBottom: 1, overflow: 'hidden' }]}>
       {children}
     </View>
   );
 };
-
-export default SingleSidedShadowBox;

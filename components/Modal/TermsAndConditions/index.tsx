@@ -90,9 +90,9 @@ export const TermsAndConditionsModal = ({
   const sections = [...defaultSections, ...additionalSections];
 
   return (
-    <View style={styles.modalContainer}>
+    <ThemedView style={styles.modalContainer}>
       <Modal visible={visible} animationType="slide" onRequestClose={onClose}>
-        <Header title="Terms and Conditions" height={80} withPaddingTop />
+        <Header title="Terms And Conditions" disableSafeAreaTopInset />
 
         <ThemedView style={styles.modalContent}>
           <ScrollView contentContainerStyle={styles.scrollView}>
@@ -110,18 +110,20 @@ export const TermsAndConditionsModal = ({
             ))}
           </ScrollView>
 
-          <View style={{ backgroundColor: BACKGROUND_SECONDARY, padding: 16 }}>
+          <View
+            className="p-4"
+            style={{ backgroundColor: BACKGROUND_SECONDARY }}
+          >
             <ThemedButton title="Close" onPress={onClose} />
           </View>
         </ThemedView>
       </Modal>
-    </View>
+    </ThemedView>
   );
 };
 
 const styles = StyleSheet.create({
   modalContainer: {
-    width: 100,
     height: 100,
     position: 'absolute',
   },

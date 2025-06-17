@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
 const bumpType = process.argv[2] || 'patch'; // default to patch
 const filePath = path.join(__dirname, '..', 'version.json');
@@ -31,7 +32,14 @@ fs.writeFileSync(filePath, JSON.stringify(versionData, null, 2));
 
 console.log(`📦 Bumped to version: ${newVersion}`);
 
-// Auto Commit
-// const { execSync } = require('child_process');
-// execSync('git add version.json');
-// execSync(`git commit -m "chore: bump version to ${newVersion}"`);
+// Auto Commit and Push
+try {
+  execSync('git add version.json', { stdio: 'inherit' });
+  execSync(`git commit -m "chore: bump version to ${newVersion}"`, {
+    stdio: 'inherit',
+  });
+  execSync('git push', { stdio: 'inherit' });
+  console.log(`📦 Commited and pushed the code`);
+} catch (err) {
+  console.error('⚠️  Failed to commit version bump:', err.message);
+}

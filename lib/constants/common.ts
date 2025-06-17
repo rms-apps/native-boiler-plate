@@ -8,4 +8,5 @@ export enum SCREEN {
 }
 
 export const DEFAULT_THEME = THEME.DARK;
-export const DEFAULT_SOUND_ENABLED = true;
+export const BOTTOM_TAB_BAR_HEIGHT = 80;
+export const MODEL_CONTENT_PADDING_BOTTOM = 40;
