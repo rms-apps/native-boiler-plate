@@ -1,10 +1,11 @@
 import { Header } from '@/components/common/Header';
+import { useAppColors } from '@/lib/hooks/useAppColors';
 import { ThemedText } from '@/components/common/Themed/ThemedText';
 import { ThemedView } from '@/components/common/Themed/ThemedView';
 import { Modal, StyleSheet, View, ScrollView } from 'react-native';
+import { MODEL_CONTENT_PADDING_BOTTOM } from '@/lib/constants/common';
 import { ThemedButton } from '@/components/common/Themed/ThemedButton';
 import { ThemedDivider } from '@/components/common/Themed/ThemedDivider';
-import { useAppColors } from '@/lib/hooks/useAppColors';
 
 type HelpAndSupportModalProps = {
   visible: boolean;
@@ -86,9 +87,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollView: {
-    padding: 10,
-    margin: 10,
     gap: 12,
+    margin: 10,
+    padding: 10,
+    paddingBottom: MODEL_CONTENT_PADDING_BOTTOM,
   },
   sectionContainer: {
     gap: 12,

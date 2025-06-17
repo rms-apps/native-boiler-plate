@@ -25,28 +25,28 @@ export default function RootLayout() {
 
   const hasHydrated = useSettingsStore((state) => state.hasHydrated);
 
-  // const initializeAdForAdMob = () => {
-  //   MobileAds()
-  //     .setRequestConfiguration({
-  //       maxAdContentRating: MaxAdContentRating.PG,
-  //       tagForChildDirectedTreatment: false,
-  //       tagForUnderAgeOfConsent: false,
-  //     })
-  //     .then(() => {
-  //       MobileAds().initialize();
-  //     })
-  //     .then(() => {
-  //       console.log('Google Mobile AdMob SDK initialized');
-  //     })
-  //     .catch((error) => {
-  //       console.error('Failed to initialize Google Mobile AdMob SDK', error);
-  //     });
-  // };
+  const initializeAdForAdMob = () => {
+    MobileAds()
+      .setRequestConfiguration({
+        maxAdContentRating: MaxAdContentRating.PG,
+        tagForChildDirectedTreatment: false,
+        tagForUnderAgeOfConsent: false,
+      })
+      .then(() => {
+        MobileAds().initialize();
+      })
+      .then(() => {
+        console.log('Google Mobile AdMob SDK initialized');
+      })
+      .catch((error) => {
+        console.error('Failed to initialize Google Mobile AdMob SDK', error);
+      });
+  };
 
   useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
-      // initializeAdForAdMob();
+      initializeAdForAdMob();
     }
   }, [loaded]);
 

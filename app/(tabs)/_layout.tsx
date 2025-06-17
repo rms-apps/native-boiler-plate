@@ -2,10 +2,14 @@ import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Header } from '@/components/common/Header';
 import { useAppColors } from '@/lib/hooks/useAppColors';
+import { BOTTOM_TAB_BAR_HEIGHT } from '@/lib/constants/common';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BannerAdvertisement } from '@/components/common/Advertisement/BannerAd';
 
 export default function TabLayout() {
+  const insets = useSafeAreaInsets();
   const { BACKGROUND_SECONDARY } = useAppColors();
+
   return (
     <>
       <Header title="App" />
@@ -26,10 +30,10 @@ export default function TabLayout() {
           },
           tabBarStyle: {
             position: 'absolute',
-            bottom: 0,
+            bottom: insets.bottom,
             left: 30,
             right: 16,
-            height: 90,
+            height: BOTTOM_TAB_BAR_HEIGHT,
             borderTopLeftRadius: 25,
             borderTopRightRadius: 25,
             backgroundColor: BACKGROUND_SECONDARY,
@@ -39,6 +43,7 @@ export default function TabLayout() {
             shadowOffset: { width: 0, height: 4 },
             shadowOpacity: 0.2,
             shadowRadius: 8,
+            paddingBottom: 0,
           },
           tabBarActiveTintColor: '#3B82F6',
           tabBarInactiveTintColor: '#64748B',
@@ -67,7 +72,7 @@ export default function TabLayout() {
         />
       </Tabs>
 
-      {/* <BannerAdvertisement adId="" /> */}
+      <BannerAdvertisement adId="" />
     </>
   );
 }

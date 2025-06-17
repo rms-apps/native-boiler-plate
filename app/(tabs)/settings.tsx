@@ -211,7 +211,7 @@ const SettingsScreen = () => {
   ];
 
   return (
-    <ScrollView>
+    <ThemedView>
       <ThemedView style={styles.container}>
         <ScrollView
           contentContainerStyle={styles.contentContainer}
@@ -247,7 +247,7 @@ const SettingsScreen = () => {
         visible={isTermsModalVisible}
         onClose={toggleTermsModal}
       />
-    </ScrollView>
+    </ThemedView>
   );
 };
 
